@@ -1,0 +1,178 @@
+---
+title: "Bayesian Integrative Meta-Analysis (BIMA)"
+author: "Presentation Prepared for IMPRS Summer Conference 2022"
+date: "Sarah Moore"
+output:
+  slidy_presentation: null
+  incremental: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Hello! Thanks for listening to my presentation today. 
+
+- For context, this is part of a 3 essay dissertation based on methods for improving and broadening opportunities for mixed-method research in social sciences. 
+
+- Here, I'll talk about the concept and generalized framework for what I call *Bayesian Integrative Meta-Analysis.*
+
+- Currently working with an RA who is helping me to build the library of potential studies for inlcusion in meta-analysis + citation network analysis. 
+
+## What is Meta-Analysis? {.build .faster}
+
+- **Meta-Analysis**: Method for cumulative knowledge assessments on the via aggregation of primary quantitative study information and calculating a weighted average effect size across primary studies. 
+
+>- Typically stems from a research question or widely tested theory for which answers might be contradictory or elusive, desire to make sense of a body of research. 
+
+>- Different ways to perform meta-analysis across different disciplines, especially in consideration of the diversity of studies included. 
+
+>- May also perform other forms of synthesis review that instead involve a systematic narrative or case review of a body of research (i.e. non-quantitative assessment). 
+
+## Overview of Traditional Quantitative Meta-Analysis
+
+1) Define a research question. 
+
+2) Set criteria for eligibility into the meta-analysis. 
+
+3) Obtain point estimates, standard errors, sample sizes, and other design related information from each study deemed eligible. 
+
+4) Determine analysis specifications, often based on the variability between studies. Sometimes necessary to consider different standardization procedures for point estimates of primary studies (e.g. normalization). 
+
+5) Run analysis for average effect. 
+
+## THE PROBLEM 
+
+Traditional meta-analysis limits us to only making summary conclusions about *quantitative* work.
+
+>- In other disciplines, such as medicine and public health, scholars have attempted to reconcile different frameworks toward mixed-study systematic review. 
+
+>- But convergent methods-- i.e. examining qual and quant literature in tandem toward a single summary-- are still limited even where developments have been made. 
+
+>- Borrowing from ideas developed in public health and medicine, I propose an **integrative framework for convergent meta-analyses that formalizes mixed-method meta-analysis for social science scholarship.**
+
+## Methodological Intervention 
+
+- I call my methodological intervention **Bayesian Integrative Meta-Analysis.**
+
+- Account for qualitative study information as a Bayesian prior distribution. 
+
+## Bayesian Integrative Meta-Analysis (BIMA)
+
+- Bayesian in the sense that the method accounts interpreted qualitative data as prior information about a relationship between two variables. We can update this prior by conditioning on observed quantitative studies. 
+
+- Integrative as it will fully integrate qualitative and quantitative study information into a single meta-analysic estimate, as opposed to reach a narrative conclusion and a numeric conclusion. 
+
+## BIMA-- Transformation and Augmentation
+
+- We can further think of it as two interrelated processes: *data transformation* (Pluye and Hong 2014) AND *data augmentation.*
+
+>- **Data Transformation** through the quantification of interpreted qualitative data. 
+
+>- **Data Augmentation** through supplying a Bayesian prior to the `observed' quant estimates from quantitative studies. We are thus adding to the available data for meta-analyzing. 
+
+## So, how do we get there. 
+
+>- Must figure out a way to get qualitative and quantitative data into a standardized format. 
+
+>- Setting the prior via qualitative studies follows a process of what I call *conversion elicitation.* 
+
+## Bayesian Elicitation
+
+>- Bayesian elicitation is a process for obtaining expert-informed beliefs and refining them into a probability structure. 
+
+>- This usually entails expert interviews with non-statisticians and asking about certain likelihoods of events or likely values of estimands at particular probability intervals. 
+
+## Conversion Elicitation  
+
+>- I argue that you can also do the elicitation process by performing manual content analysis over academic manuscripts, converting interpreted qualitative data (i.e. expert information) into quantitative observations. 
+
+>- Requires that a set of coders comb through eligible qualitative studies, assess the relevant hypotheses, and determine the direction and strength of a relationship between the two variables in question. 
+
+>- Like a correlation coefficient: -1 indicating a negative, strong relationship, 0 indicating a null effect, 1 indicating a positive strong relationship... All other values as degrees of the same structure. 
+
+>- Can also think of assessing interpreted qualitative data on the basis of Van Evera's hypothesis testing framework (c.f. Humphreys and Jacobs 2015). 
+
+## Standardizing
+
+>- Just as in dealing with quantitative estimates, must make outcome measures standardized for comparison. 
+
+>- The literature on meta-analysis has made this easy, as Borenstein et al. (2009) have established mathematical solutions for finding the equivalence between each potential type of outcome estimate (e.g. correlation, log odds, difference in means). 
+>- Therefore, all final elicited scores from conversion elicitation are mathematically standardized in this same way. 
+
+## Conversion Elicitation $\rightarrow$ Prior Distribution 
+
+>- Once beliefs have been elicited over the specified hypotheses (and then standardized), necessary to convert this information into an actual distribution.
+
+>- This is again a well established procedure in the Bayesian elicitation literature-- can be carried out via *averaging* or *pooling*. Each has its merits, and my test case will explore the implications of both options. 
+
+## Obtaining a Posterior Distribution 
+
+- Applied Bayes theorem, which conditions belief on data and averages out to the following: 
+
+$$\text{Prior} \times \text{Likelihood} = \text{Posterior}$$ 
+
+- In this case, would be specified to take on the following contents:
+$$\text{Qual. Appraisal} \times \text{Quant. Observed} = \text{Convergent Summary}$$
+
+## Total Process: 
+
+```{r, out.width='100%', fig.align='center', fig.cap='...'}
+knitr::include_graphics('BIMAdiagram.png')
+```
+
+## Let's take a stylized example of what this elicitation might look like
+
+Consider a synthesis review of the following question and accompanying hypotheses:
+
+*What are the consequences of foreign counter-terrorism campaigns?*  
+
+- Foreign militaristic counter-terrorism campaigns cause increased local participation in extremist militant groups. 
+
+- Foreign militaristic counter-terrorism campaigns cause increased local sympathy for militant activity. 
+
+- Foreign militaristic counter-terrorism campaigns cause increased antagonism between locals and foreign perpetrators. 
+
+
+## Content Analysis $\rightarrow$ Quantification of Qual Results 
+
+Example: 
+
+```{r, include=T}
+library(DT)
+library(readxl)
+example<-read_xlsx("2022-example.xlsx")
+datatable(example)
+```
+>- In this case, I have gone through these studies and identified where qualitative data has been used to interpret and assess each of the hypotheses. 
+
+## Stylized Example, cont'd. 
+
+```{r, include=T}
+library(DT)
+library(readxl)
+example<-read_xlsx("2022-example.xlsx")
+datatable(example)
+```
+
+In the case of Shah (2018), all relevant hypotheses are examined, Mir (2018) only examines the one hypothesis. 
+
+>- In Shah (2018), where a relationship was strongly refuted by qualitative evidence, I assessed a -0.75. Where a relationship was only mildly refuted, I assessed a -0.25. 
+
+>- In Mir (2018), where a limited relationship was accounted for I coded a 0. Other hypotheses take a NA. 
+
+>- As this becomes iterated over studies, can estimate a distribution and associated parameters.
+
+## Some changes since the paper was submitted...
+
+>- *Conversion elicitation* $\rightarrow$ I will now elicit correlation coefficients between variables. I have found in the Bayesian literature that eliciting correlations is a fine performing method. This also makes standardizing them as a prior distribution mathematically feasible. I feel this also makes the process more accessible than asking for suspected probability or odds. 
+
+>- *Test cases* $\rightarrow$ Due to timeline constraints, I will show the method on the single  question of "What is the effect of exposure to violent conflict on political participation, social trust, and cooperation?" This will be a more broad based follow-up to Bauer et al's 2016 meta-analysis on the same topic. 
+
+>- *Standardization of conversion elicitation* $\rightarrow$ Previous work on Bayesian eliciation also addresses linguistic conversions of probability statements. This framework will follow suit (see previous slides). 
+
+## Additional considerations and current issues
+
+>- Weight of qualitative evidence. What is a case worth? How do we treat multi-case qualitative studies? 
+
+>- When does this not work? When is this actually a terrible option? 
